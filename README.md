@@ -1,6 +1,6 @@
 ## lambda-axios
 
-!!! THIS IS STILL A WORKING PROGRESS.
+**!!! THIS IS STILL A WORK IN PROGRESS.**
 
 This is a simple axios-like library - for invoking AWS lambdas.
 
