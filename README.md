@@ -1,59 +1,36 @@
 ## lambda-axios
 
+!!! THIS IS STILL A WORKING PROGRESS.
+
 This is a simple axios-like library - for invoking AWS lambdas.
 
-Inspired by axios, obviously ;-)
+Completely inspired by [axios](https://github.com/axios/axios)!
 
-Response Schema:
-
-IDEA!
-
-```json
-{
-  // `data` is the response that was provided by the server
-  "data": {},
-  // `status` is the HTTP status code from the server response
-  "status": 200,
-  // `statusText` is the HTTP status message from the server response
-  "statusText": 'OK',
-  // `headers` the HTTP headers that the server responded with
-  // All header names are lower cased and can be accessed using the bracket notation.
-  // Example: `response.headers['content-type']`
-  "headers": {},
-  // `config` is the config that was provided to `axios` for the request
-  "config": {},
-  // `request` is the request that generated this response
-  // It is the last ClientRequest instance in node.js (in redirects)
-  // and an XMLHttpRequest instance in the browser
-  "request": {}
-}
-```
-
-IDEA!
+### Usage
 
 ```js
 const lambdaAxiosInstance = lambdaAxios({
-    region: 'eu-west-2',
-    headers: {},
+    region: 'eu-west-1',
     awsAuth: {
-        accessKeyId: '...',
-        secretAccessKey: '...'
+        accessKeyId: 'AWS_ACCESS_KEY_ID',
+        secretAccessKey: 'AWS_SECRET_ACCESS_KEY_ID'
     }
 })
 
-const response = await lambdaAxiosInstance.post('arn:aws:lambda:eu-west-2:397049353178:function:framble-lambdas-staging-sendNotification', {
-    detail: {
-        push_identity: '46',
-        name: 'event-invite',
-        type: 'push'
-    }
+lambdaAxiosInstance
+    .post('aws-lambda-function-arn', {
+        message: "Hello world"
+    }).then(response => {
+    console.log({response})
 })
+    .catch(error => {
+        console.error(error)
+    })
 ```
 
-GOAL!!!
+### Why?
 
-```js
-const lambdaAxios = lambdaAxios.create({});
+I created this to make it easier to make a switch back to the main [axios](https://github.com/axios/axios) - without
+having to do a massive refactor.
 
-await lambdaAxios.post('function-name', {/** data */}, {/** config e.g. headers */})
-```
+This is more for my personal use - but you never know.
